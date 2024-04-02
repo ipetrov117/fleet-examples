@@ -1,0 +1,25 @@
+# worker upgrade plan
+apiVersion: upgrade.cattle.io/v1
+kind: Plan
+metadata:
+  name: edge-worker-plan
+  labels:
+    rke2-upgrade: agent
+spec:
+  concurrency: 2
+  nodeSelector:
+    matchExpressions:
+      # will trigger upgrade for any node that does not contain the 'node-role.kubernetes.io/control-plane' label
+      - {key: node-role.kubernetes.io/control-plane, operator: NotIn, values: ["true"]}
+  prepare:
+    args:
+    - prepare
+    - edge-control-plane
+    image: rancher/rke2-upgrade
+  serviceAccountName: system-upgrade
+  cordon: true
+  drain:
+    force: true
+  upgrade:
+    image: rancher/rke2-upgrade
+  version: v1.28.7+rke2r1

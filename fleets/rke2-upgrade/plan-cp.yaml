@@ -1,0 +1,23 @@
+# control-plane upgrade plan
+apiVersion: upgrade.cattle.io/v1
+kind: Plan
+metadata:
+  name: edge-control-plane
+  labels:
+    rke2-upgrade: server
+spec:
+  concurrency: 1
+  nodeSelector:
+    matchExpressions:
+      # will trigger upgrade for any node containing the 'node-role.kubernetes.io/control-plane' label
+      - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
+  tolerations:
+  - key: "CriticalAddonsOnly"
+    operator: "Equal"
+    value: "true"
+    effect: "NoExecute"
+  serviceAccountName: system-upgrade
+  cordon: true
+  upgrade:
+    image: rancher/rke2-upgrade
+  version: v1.28.7+rke2r1
