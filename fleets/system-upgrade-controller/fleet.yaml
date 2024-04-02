@@ -1,0 +1,3 @@
+kustomize:
+  # look for the kustomization.yaml file at the root of the directory
+  dir: ""
