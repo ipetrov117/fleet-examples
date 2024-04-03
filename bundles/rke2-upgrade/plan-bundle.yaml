@@ -11,6 +11,7 @@ spec:
       kind: Plan
       metadata:
         name: edge-control-plane
+        namespace: system-upgrade
         labels:
           rke2-upgrade: server
       spec:
@@ -35,6 +36,7 @@ spec:
       kind: Plan
       metadata:
         name: edge-worker-plan
+        namespace: system-upgrade
         labels:
           rke2-upgrade: agent
       spec:
