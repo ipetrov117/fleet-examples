@@ -649,3 +649,6 @@ spec:
           subresources:
             status: {}
     name: crd-bundle.yaml
+  targets:
+  # Match everything
+  - clusterSelector: {}

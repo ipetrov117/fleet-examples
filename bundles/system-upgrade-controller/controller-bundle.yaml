@@ -271,3 +271,6 @@ spec:
             - emptyDir: {}
               name: tmp
     name: controller-bundle.yaml
+  targets:
+  # Match everything
+  - clusterSelector: {}
