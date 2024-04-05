@@ -2,9 +2,9 @@
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: edge-worker-plan
+  name: rke2-plan-wk
   labels:
-    rke2-upgrade: agent
+    rke2-upgrade: worker
 spec:
   concurrency: 2
   nodeSelector:
@@ -14,7 +14,7 @@ spec:
   prepare:
     args:
     - prepare
-    - edge-control-plane
+    - rke2-plan-cp
     image: rancher/rke2-upgrade
   serviceAccountName: system-upgrade
   cordon: true

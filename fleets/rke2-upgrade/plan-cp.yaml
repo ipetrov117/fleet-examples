@@ -2,9 +2,9 @@
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: edge-control-plane
+  name: rke2-plan-cp
   labels:
-    rke2-upgrade: server
+    rke2-upgrade: control-plane
 spec:
   concurrency: 1
   nodeSelector:
