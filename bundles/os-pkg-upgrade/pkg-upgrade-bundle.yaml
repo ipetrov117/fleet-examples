@@ -31,20 +31,20 @@ spec:
       apiVersion: upgrade.cattle.io/v1
       kind: Plan
       metadata:
-        name: os-pkg-plan-cp
+        name: os-pkg-plan-wk
         namespace: system-upgrade
       spec:
         concurrency: 1
         nodeSelector:
           matchExpressions:
-            # will trigger upgrade for any node containing the 'node-role.kubernetes.io/control-plane' label
-            - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
+            # will trigger upgrade for any node that does not contain the 'node-role.kubernetes.io/control-plane' label
+            - {key: node-role.kubernetes.io/control-plane, operator: NotIn, values: ["true"]}
         serviceAccountName: system-upgrade
         secrets:
           - name: os-pkg-upgrade
             path: /host/run/system-upgrade/secrets/os-pkg-upgrade
         cordon: true
-        version: os-pkg-plan-cp
+        version: os-pkg-plan-wk
         upgrade:
           image: registry.opensuse.org/opensuse/tumbleweed:latest
           command: ["chroot", "/host"]
