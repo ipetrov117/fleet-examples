@@ -1,0 +1,72 @@
+kind: Bundle
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: os-pkg-upgrade-plan
+  namespace: fleet-default
+spec:
+  resources:
+  - content: |
+      apiVersion: upgrade.cattle.io/v1
+      kind: Plan
+      metadata:
+        name: os-pkg-plan-cp
+        namespace: system-upgrade
+      spec:
+        concurrency: 1
+        nodeSelector:
+          matchExpressions:
+            # will trigger upgrade for any node containing the 'node-role.kubernetes.io/control-plane' label
+            - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
+        serviceAccountName: system-upgrade
+        secrets:
+          - name: os-pkg-upgrade
+            path: /host/run/system-upgrade/secrets/os-pkg-upgrade
+        cordon: true
+        version: os-pkg-plan-cp
+        upgrade:
+          image: registry.opensuse.org/opensuse/tumbleweed:latest
+          command: ["chroot", "/host"]
+          args: ["sh", "/run/system-upgrade/secrets/os-pkg-upgrade/upgrade.sh"]
+      ---
+      apiVersion: upgrade.cattle.io/v1
+      kind: Plan
+      metadata:
+        name: os-pkg-plan-cp
+        namespace: system-upgrade
+      spec:
+        concurrency: 1
+        nodeSelector:
+          matchExpressions:
+            # will trigger upgrade for any node containing the 'node-role.kubernetes.io/control-plane' label
+            - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
+        serviceAccountName: system-upgrade
+        secrets:
+          - name: os-pkg-upgrade
+            path: /host/run/system-upgrade/secrets/os-pkg-upgrade
+        cordon: true
+        version: os-pkg-plan-cp
+        upgrade:
+          image: registry.opensuse.org/opensuse/tumbleweed:latest
+          command: ["chroot", "/host"]
+          args: ["sh", "/run/system-upgrade/secrets/os-pkg-upgrade/upgrade.sh"]
+      ---
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: os-pkg-upgrade
+        namespace: system-upgrade
+      type: Opaque
+      stringData:
+        upgrade.sh: |
+          #!/bin/sh
+          set -e
+          secrets=$(dirname $0)
+          transactional-update -n
+          # Ensure that no accidental reboots happen.
+          # Ensure that the upgrade Pod has time to uncordon the node
+          # before the restart.
+          [ -f /run/reboot-needed ] && shutdown -r +1
+    name: pkg-upgrade-bundle.yaml
+  targets:
+  # Match everything
+  - clusterSelector: {}
