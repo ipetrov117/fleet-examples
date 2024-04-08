@@ -1,0 +1,21 @@
+# These plans are adapted from work by Dax McDonald (https://github.com/daxmc99) and Hussein Galal (https://github.com/galal-hussein)
+# in support of Rancher v2 managed k3s upgrades. See Also: https://rancher.com/docs/k3s/latest/en/upgrades/automated/
+---
+apiVersion: upgrade.cattle.io/v1
+kind: Plan
+metadata:
+  name: k3s-plan-cp
+  namespace: system-upgrade
+  labels:
+    k3s-upgrade: server
+spec:
+  concurrency: 1
+  nodeSelector:
+    matchExpressions:
+      # will trigger upgrade for any node containing the 'node-role.kubernetes.io/control-plane' label
+      - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
+  serviceAccountName: system-upgrade
+  cordon: true
+  upgrade:
+    image: rancher/k3s-upgrade
+  version: v1.28.8+k3s1

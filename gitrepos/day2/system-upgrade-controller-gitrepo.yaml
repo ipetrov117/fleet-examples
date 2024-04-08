@@ -1,0 +1,13 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: system-upgrade-controller
+  namespace: fleet-default
+spec:
+  branch: main
+  paths:
+  - fleets/day2/system-upgrade-controller
+  repo: https://github.com/suse-edge/fleet-examples.git
+  targets:
+  # Match everything
+  - clusterSelector: {}

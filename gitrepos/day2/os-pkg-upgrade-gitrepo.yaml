@@ -1,0 +1,13 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: os-pkg-upgrade
+  namespace: fleet-default
+spec:
+  branch: main
+  paths:
+  - fleets/day2/os-pkg-upgrade
+  repo: https://github.com/suse-edge/fleet-examples.git
+  targets:
+  # Match everything
+  - clusterSelector: {}
