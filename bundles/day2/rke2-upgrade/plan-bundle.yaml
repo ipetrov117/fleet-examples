@@ -57,7 +57,7 @@ spec:
         upgrade:
           image: rancher/rke2-upgrade
         version: v1.28.8+rke2r1
-    name: plan-bundle.yaml
+    name: rke2-plan-bundle.yaml
   targets:
   # Match everything
   - clusterSelector: {}

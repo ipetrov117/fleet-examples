@@ -66,7 +66,7 @@ spec:
           # Ensure that the upgrade Pod has time to uncordon the node
           # before the restart.
           [ -f /run/reboot-needed ] && shutdown -r +1
-    name: pkg-upgrade-bundle.yaml
+    name: os-pkg-upgrade-bundle.yaml
   targets:
   # Match everything
   - clusterSelector: {}
