@@ -1,0 +1,58 @@
+kind: Bundle
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: k3s-upgrade-plan
+  namespace: fleet-default
+spec:
+  resources:
+  - content: |
+      # control-plane upgrade plan
+      apiVersion: upgrade.cattle.io/v1
+      kind: Plan
+      metadata:
+        name: k3s-plan-cp
+        namespace: system-upgrade
+        labels:
+          k3s-upgrade: control-plane
+      spec:
+        concurrency: 1
+        nodeSelector:
+          matchExpressions:
+            # will trigger upgrade for any node containing the 'node-role.kubernetes.io/control-plane' label
+            - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
+        serviceAccountName: system-upgrade
+        cordon: true
+        upgrade:
+          image: rancher/k3s-upgrade
+        version: v1.28.8+k3s1
+      ---
+      # worker upgrade plan
+      apiVersion: upgrade.cattle.io/v1
+      kind: Plan
+      metadata:
+        name: k3s-plan-wk
+        namespace: system-upgrade
+        labels:
+          k3s-upgrade: worker
+      spec:
+        concurrency: 2 
+        nodeSelector:
+          matchExpressions:
+            # will trigger upgrade for any node that does not contain the 'node-role.kubernetes.io/control-plane' label
+            - {key: node-role.kubernetes.io/control-plane, operator: NotIn, values: ["true"]}
+        serviceAccountName: system-upgrade
+        prepare:
+          image: rancher/k3s-upgrade
+          args:
+          - prepare
+          - k3s-plan-cp
+        drain:
+          force: true
+          skipWaitForDeleteTimeout: 60
+        upgrade:
+          image: rancher/k3s-upgrade
+        version: v1.28.8+k3s1
+    name: k3s-plan-bundle.yaml
+  targets:
+  # Match everything
+  - clusterSelector: {}
