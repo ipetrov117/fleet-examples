@@ -9,5 +9,5 @@ spec:
   - fleets/day2/k3s-upgrade
   repo: https://github.com/suse-edge/fleet-examples.git
   targets:
-  # Match everything
-  - clusterSelector: {}
+  # Match nothing, user needs to specify targets
+  - clusterSelector: null

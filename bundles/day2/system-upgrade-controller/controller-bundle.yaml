@@ -272,5 +272,5 @@ spec:
               name: tmp
     name: controller-bundle.yaml
   targets:
-  # Match everything
-  - clusterSelector: {}
+  # Match nothing, user needs to specify targets
+  - clusterSelector: null
