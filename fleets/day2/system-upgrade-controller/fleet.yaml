@@ -1,4 +1,4 @@
-namespace: cattle-system
+defaultNamespace: cattle-system
 helm:
   releaseName: system-upgrade-controller
   chart: "system-upgrade-controller"
