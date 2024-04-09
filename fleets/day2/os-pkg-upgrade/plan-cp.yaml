@@ -2,14 +2,13 @@ apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
   name: os-pkg-plan-cp
-  namespace: system-upgrade
 spec:
   concurrency: 1
   nodeSelector:
     matchExpressions:
       # will trigger upgrade for any node containing the 'node-role.kubernetes.io/control-plane' label
       - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
-  serviceAccountName: system-upgrade
+  serviceAccountName: system-upgrade-controller
   secrets:
     - name: os-pkg-upgrade
       path: /host/run/system-upgrade/secrets/os-pkg-upgrade

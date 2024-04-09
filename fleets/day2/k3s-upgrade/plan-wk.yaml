@@ -10,7 +10,7 @@ spec:
     matchExpressions:
       # will trigger upgrade for any node that does not contain the 'node-role.kubernetes.io/control-plane' label
       - {key: node-role.kubernetes.io/control-plane, operator: NotIn, values: ["true"]}
-  serviceAccountName: system-upgrade
+  serviceAccountName: system-upgrade-controller
   prepare:
     image: rancher/k3s-upgrade
     args:

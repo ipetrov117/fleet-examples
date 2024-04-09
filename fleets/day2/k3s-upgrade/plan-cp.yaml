@@ -10,7 +10,7 @@ spec:
     matchExpressions:
       # will trigger upgrade for any node containing the 'node-role.kubernetes.io/control-plane' label
       - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
-  serviceAccountName: system-upgrade
+  serviceAccountName: system-upgrade-controller
   cordon: true
   upgrade:
     image: rancher/k3s-upgrade

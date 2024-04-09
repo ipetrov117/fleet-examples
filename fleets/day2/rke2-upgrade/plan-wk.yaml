@@ -16,7 +16,7 @@ spec:
     - prepare
     - rke2-plan-cp
     image: rancher/rke2-upgrade
-  serviceAccountName: system-upgrade
+  serviceAccountName: system-upgrade-controller
   cordon: true
   drain:
     force: true

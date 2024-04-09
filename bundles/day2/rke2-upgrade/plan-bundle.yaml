@@ -11,7 +11,7 @@ spec:
       kind: Plan
       metadata:
         name: rke2-plan-cp
-        namespace: system-upgrade
+        namespace: cattle-system
         labels:
           rke2-upgrade: control-plane
       spec:
@@ -25,7 +25,7 @@ spec:
           operator: "Equal"
           value: "true"
           effect: "NoExecute"
-        serviceAccountName: system-upgrade
+        serviceAccountName: system-upgrade-controller
         cordon: true
         upgrade:
           image: rancher/rke2-upgrade
@@ -36,7 +36,7 @@ spec:
       kind: Plan
       metadata:
         name: rke2-plan-wk
-        namespace: system-upgrade
+        namespace: cattle-system
         labels:
           rke2-upgrade: worker
       spec:
@@ -50,7 +50,7 @@ spec:
           - prepare
           - rke2-plan-cp
           image: rancher/rke2-upgrade
-        serviceAccountName: system-upgrade
+        serviceAccountName: system-upgrade-controller
         cordon: true
         drain:
           force: true

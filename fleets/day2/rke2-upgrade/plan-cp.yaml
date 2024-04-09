@@ -16,7 +16,7 @@ spec:
     operator: "Equal"
     value: "true"
     effect: "NoExecute"
-  serviceAccountName: system-upgrade
+  serviceAccountName: system-upgrade-controller
   cordon: true
   upgrade:
     image: rancher/rke2-upgrade

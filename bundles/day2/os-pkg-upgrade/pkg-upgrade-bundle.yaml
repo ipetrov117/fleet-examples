@@ -10,14 +10,14 @@ spec:
       kind: Plan
       metadata:
         name: os-pkg-plan-cp
-        namespace: system-upgrade
+        namespace: cattle-system
       spec:
         concurrency: 1
         nodeSelector:
           matchExpressions:
             # will trigger upgrade for any node containing the 'node-role.kubernetes.io/control-plane' label
             - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
-        serviceAccountName: system-upgrade
+        serviceAccountName: system-upgrade-controller
         secrets:
           - name: os-pkg-upgrade
             path: /host/run/system-upgrade/secrets/os-pkg-upgrade
@@ -32,14 +32,14 @@ spec:
       kind: Plan
       metadata:
         name: os-pkg-plan-wk
-        namespace: system-upgrade
+        namespace: cattle-system
       spec:
         concurrency: 1
         nodeSelector:
           matchExpressions:
             # will trigger upgrade for any node that does not contain the 'node-role.kubernetes.io/control-plane' label
             - {key: node-role.kubernetes.io/control-plane, operator: NotIn, values: ["true"]}
-        serviceAccountName: system-upgrade
+        serviceAccountName: system-upgrade-controller
         secrets:
           - name: os-pkg-upgrade
             path: /host/run/system-upgrade/secrets/os-pkg-upgrade
@@ -54,7 +54,7 @@ spec:
       kind: Secret
       metadata:
         name: os-pkg-upgrade
-        namespace: system-upgrade
+        namespace: cattle-system
       type: Opaque
       stringData:
         upgrade.sh: |
