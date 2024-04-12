@@ -9,3 +9,7 @@ helm:
       cattle:
         psp:
           enabled: false
+    systemUpgradeController:
+      image:
+        repository: rancher/system-upgrade-controller
+        tag: v0.13.2
