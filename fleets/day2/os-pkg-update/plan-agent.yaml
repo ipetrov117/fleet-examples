@@ -1,7 +1,7 @@
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: os-pkg-plan-wk
+  name: os-pkg-plan-agent
 spec:
   concurrency: 1
   nodeSelector:

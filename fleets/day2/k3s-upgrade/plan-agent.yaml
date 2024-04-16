@@ -1,9 +1,10 @@
+# worker upgrade plan
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-plan-wk
+  name: k3s-plan-agent
   labels:
-    k3s-upgrade: worker
+    k3s-upgrade: agent
 spec:
   concurrency: 2 
   nodeSelector:
@@ -15,7 +16,7 @@ spec:
     image: rancher/k3s-upgrade
     args:
     - prepare
-    - k3s-plan-cp
+    - k3s-plan-control-plane
   drain:
     force: true
     skipWaitForDeleteTimeout: 60

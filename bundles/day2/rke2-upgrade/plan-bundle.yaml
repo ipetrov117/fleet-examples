@@ -1,7 +1,7 @@
 kind: Bundle
 apiVersion: fleet.cattle.io/v1alpha1
 metadata:
-  name: rke2-upgrade-plan
+  name: rke2-upgrade
   namespace: fleet-default
 spec:
   resources:
@@ -10,7 +10,7 @@ spec:
       apiVersion: upgrade.cattle.io/v1
       kind: Plan
       metadata:
-        name: rke2-plan-cp
+        name: rke2-plan-control-plane
         namespace: cattle-system
         labels:
           rke2-upgrade: control-plane
@@ -35,10 +35,10 @@ spec:
       apiVersion: upgrade.cattle.io/v1
       kind: Plan
       metadata:
-        name: rke2-plan-wk
+        name: rke2-plan-agent
         namespace: cattle-system
         labels:
-          rke2-upgrade: worker
+          rke2-upgrade: agent
       spec:
         concurrency: 2
         nodeSelector:
@@ -48,7 +48,7 @@ spec:
         prepare:
           args:
           - prepare
-          - rke2-plan-cp
+          - rke2-plan-control-plane
           image: rancher/rke2-upgrade
         serviceAccountName: system-upgrade-controller
         cordon: true
@@ -57,7 +57,7 @@ spec:
         upgrade:
           image: rancher/rke2-upgrade
         version: v1.28.8+rke2r1
-    name: rke2-plan-bundle.yaml
+    name: rke2-upgrade-bundle.yaml
   targets:
   # Match nothing, user needs to specify targets
   - clusterSelector: null
