@@ -22,7 +22,7 @@ spec:
           - name: os-pkg-update
             path: /host/run/system-upgrade/secrets/os-pkg-update
         cordon: true
-        version: os-pkg-plan-cp
+        version: "3.0"
         upgrade:
           image: registry.opensuse.org/opensuse/tumbleweed:latest
           command: ["chroot", "/host"]
@@ -44,7 +44,7 @@ spec:
           - name: os-pkg-update
             path: /host/run/system-upgrade/secrets/os-pkg-update
         cordon: true
-        version: os-pkg-plan-wk
+        version: "3.0"
         upgrade:
           image: registry.opensuse.org/opensuse/tumbleweed:latest
           command: ["chroot", "/host"]
@@ -54,6 +54,7 @@ spec:
       kind: Secret
       metadata:
         name: os-pkg-update
+        namespace: cattle-system
       type: Opaque
       stringData:
         update.sh: |
@@ -64,9 +65,9 @@ spec:
           UPDATE_SERVICE_PATH=/etc/systemd/system/edge-update.service
           
           echo "Creating edge-update.service..."
-          cat <<EOF >${UPDATE_SERVICE_PATH}
+          cat <<'EOF' >${UPDATE_SERVICE_PATH}
           [Unit]
-          Description=SUSE Edge Update Service
+          Description=SUSE Edge Upgrade Service
           ConditionACPower=true
           Wants=network.target
           After=network.target
