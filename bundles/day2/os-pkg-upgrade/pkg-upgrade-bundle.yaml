@@ -1,7 +1,7 @@
 kind: Bundle
 apiVersion: fleet.cattle.io/v1alpha1
 metadata:
-  name: os-pkg-upgrade-plan
+  name: os-pkg-update
   namespace: fleet-default
 spec:
   resources:
@@ -19,14 +19,14 @@ spec:
             - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
         serviceAccountName: system-upgrade-controller
         secrets:
-          - name: os-pkg-upgrade
-            path: /host/run/system-upgrade/secrets/os-pkg-upgrade
+          - name: os-pkg-update
+            path: /host/run/system-upgrade/secrets/os-pkg-update
         cordon: true
         version: os-pkg-plan-cp
         upgrade:
           image: registry.opensuse.org/opensuse/tumbleweed:latest
           command: ["chroot", "/host"]
-          args: ["sh", "/run/system-upgrade/secrets/os-pkg-upgrade/upgrade.sh"]
+          args: ["sh", "/run/system-upgrade/secrets/os-pkg-update/update.sh"]
       ---
       apiVersion: upgrade.cattle.io/v1
       kind: Plan
@@ -41,32 +41,54 @@ spec:
             - {key: node-role.kubernetes.io/control-plane, operator: NotIn, values: ["true"]}
         serviceAccountName: system-upgrade-controller
         secrets:
-          - name: os-pkg-upgrade
-            path: /host/run/system-upgrade/secrets/os-pkg-upgrade
+          - name: os-pkg-update
+            path: /host/run/system-upgrade/secrets/os-pkg-update
         cordon: true
         version: os-pkg-plan-wk
         upgrade:
           image: registry.opensuse.org/opensuse/tumbleweed:latest
           command: ["chroot", "/host"]
-          args: ["sh", "/run/system-upgrade/secrets/os-pkg-upgrade/upgrade.sh"]
+          args: ["sh", "/run/system-upgrade/secrets/os-pkg-update/update.sh"]
       ---
       apiVersion: v1
       kind: Secret
       metadata:
-        name: os-pkg-upgrade
-        namespace: cattle-system
+        name: os-pkg-update
       type: Opaque
       stringData:
-        upgrade.sh: |
+        update.sh: |
           #!/bin/sh
           set -e
           secrets=$(dirname $0)
-          sudo transactional-update -n
-          # Ensure that no accidental reboots happen.
-          # Ensure that the upgrade Pod has time to uncordon the node
-          # before the restart.
-          [ -f /run/reboot-needed ] && shutdown -r +1
-    name: os-pkg-upgrade-bundle.yaml
+          
+          UPDATE_SERVICE_PATH=/etc/systemd/system/edge-update.service
+          
+          echo "Creating edge-update.service..."
+          cat <<EOF >${UPDATE_SERVICE_PATH}
+          [Unit]
+          Description=SUSE Edge Update Service
+          ConditionACPower=true
+          Wants=network.target
+          After=network.target
+
+          [Service]
+          Type=oneshot
+          Environment=UPDATE_METHOD=dup
+          EnvironmentFile=-/etc/edge/edge-update.conf
+          ExecStart=/usr/sbin/transactional-update cleanup ${UPDATE_METHOD}
+          ExecStartPost=-/bin/bash -c '[ -f /run/reboot-needed ] && shutdown -r +1'
+          IOSchedulingClass=best-effort
+          IOSchedulingPriority=7
+          EOF
+
+          echo "Starting OS package update process. For more info, check 'systemctl status edge-update.service' or 'journalctl -f -xeu edge-update.service'."
+          systemctl start edge-update.service
+
+          echo "Cleaning up..."
+          # Remove service after it has finished its work
+          rm ${UPDATE_SERVICE_PATH}
+          systemctl daemon-reload
+    name: os-pkg-update-bundle.yaml
   targets:
   # Match nothing, user needs to specify targets
   - clusterSelector: null
