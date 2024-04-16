@@ -18,13 +18,3 @@ spec:
     image: registry.opensuse.org/opensuse/tumbleweed:latest
     command: ["chroot", "/host"]
     args: ["sh", "/run/system-upgrade/secrets/os-pkg-update/update.sh"]
-    securityContext:
-      capabilities:
-        add:
-        - SYS_ADMIN
-      privileged: false
-      seLinuxOptions:
-        user: system_u
-        role: system_r
-        type: unconfined_t
-        level: s0
