@@ -59,8 +59,6 @@ spec:
       stringData:
         update.sh: |
           #!/bin/sh
-          set -e
-          secrets=$(dirname $0)
           
           UPDATE_SERVICE_PATH=/etc/systemd/system/edge-update.service
           
