@@ -78,8 +78,6 @@ spec:
           ExecStartPost=-/bin/bash -c '[ -f /run/reboot-needed ] && shutdown -r +1'
           IOSchedulingClass=best-effort
           IOSchedulingPriority=7
-          StandardOutput=journal+console
-          StandardError=journal+console
           EOF
 
           echo "Starting OS package update process. For more info, check 'systemctl status edge-update.service' or 'journalctl -f -xeu edge-update.service'."
