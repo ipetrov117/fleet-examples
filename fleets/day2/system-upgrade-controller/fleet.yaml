@@ -9,11 +9,4 @@ helm:
       cattle:
         psp:
           enabled: false
-  valuesFrom:
-  - configMapKeyRef:
-      name: configmap-values
-      key: values.yaml
-  - secretKeyRef:
-      name: secret-values
-      key: values.yaml
   
