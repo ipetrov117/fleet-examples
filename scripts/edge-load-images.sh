@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# TODO: Check if there is a "/" in the --registry parameter
 images="edge-release-images.tar.gz"
 list="edge-release-images.txt"
 source_registry=""
