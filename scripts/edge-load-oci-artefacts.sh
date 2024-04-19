@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-list="edge-helm-oci-artefacts.txt"
+list="edge-release-helm-oci-artefacts.txt"
 source_registry=""
 usage () {
     echo "USAGE: $0 [--artefact-list edge-helm-oci-artefacts.txt] --source-registry registry.suse.com --registry my.registry.com:5000"
