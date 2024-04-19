@@ -1,0 +1,2 @@
+rancher/elemental-operator-crds-chart:1.4.2
+rancher/elemental-operator-chart:1.4.3
