@@ -1,4 +1,4 @@
-defaultNamespace: akri
+defaultNamespace: cattle-ui-plugin-system
 
 helm:
   releaseName: akri-dashboard-extension

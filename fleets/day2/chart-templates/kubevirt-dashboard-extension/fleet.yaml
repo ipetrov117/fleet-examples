@@ -1,4 +1,4 @@
-defaultNamespace: kubevirt-system
+defaultNamespace: cattle-ui-plugin-system
 
 helm:
   releaseName: kubevirt-dashboard-extension
