@@ -102,5 +102,5 @@ for i in "${linux_images[@]}"; do
     [ -z "${i}" ] && continue
 
     docker tag "${source_registry}/${i}" "${target_registry}/${i}"
-    docker push "${image_name}"
+    docker push "${target_registry}/${i}"
 done
