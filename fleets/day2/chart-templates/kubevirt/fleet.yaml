@@ -1,0 +1,9 @@
+defaultNamespace: kubevirt-system
+
+helm:
+  releaseName: kubevirt
+  chart: "oci://registry.suse.com/edge/kubevirt-chart"
+  version: "0.2.4"
+
+  # custom chart value overrides
+  # values:
