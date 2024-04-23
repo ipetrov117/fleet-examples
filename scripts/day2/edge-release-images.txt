@@ -28,3 +28,8 @@ suse/sles/15.5/cdi-cloner:1.58.0-150500.6.12.1
 suse/sles/15.5/cdi-apiserver:1.58.0-150500.6.12.1
 suse/sles/15.5/cdi-uploadserver:1.58.0-150500.6.12.1
 suse/sles/15.5/cdi-uploadproxy:1.58.0-150500.6.12.1
+suse/sles/15.5/virt-operator:1.1.1-150500.8.12.1
+suse/sles/15.5/virt-launcher:1.1.1-150500.8.12.1
+suse/sles/15.5/virt-handler:1.1.1-150500.8.12.1
+suse/sles/15.5/virt-controller:1.1.1-150500.8.12.1
+suse/sles/15.5/virt-api:1.1.1-150500.8.12.1
