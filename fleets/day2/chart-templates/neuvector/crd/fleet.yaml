@@ -1,3 +1,5 @@
+defaultNamespace: neuvector-system
+
 helm:
   chart: "crd"
   repo: "https://neuvector.github.io/neuvector-helm"
