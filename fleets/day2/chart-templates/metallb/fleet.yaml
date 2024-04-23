@@ -6,4 +6,9 @@ helm:
   version: "0.14.3"
 
   # custom chart value overrides
-  # values:
+  values:
+    controller:
+      image:
+        repository: "registry.suse.com/edge/metallb-controller"
+        tag: "v0.14.3"
+        pullPolicy: IfNotPresent
