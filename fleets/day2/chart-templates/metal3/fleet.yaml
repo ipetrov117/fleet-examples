@@ -8,9 +8,9 @@ helm:
   # custom chart value overrides
   values:
     global:
-      enable_tls: false
-      enable_vmedia_tls: false
-      enable_basicAuth: false
+      enable_tls: true
+      enable_vmedia_tls: true
+      enable_basicAuth: true
       ironicIP: 192.168.122.172
       provisioningInterface: eth0
     
