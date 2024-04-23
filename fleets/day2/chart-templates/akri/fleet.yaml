@@ -2,7 +2,7 @@ defaultNamespace: akri
 
 helm:
   releaseName: akri
-  chart: "oci://registry.suse.com/edge/akri"
+  chart: "oci://registry.suse.com/edge/akri-chart"
   version: "0.12.20"
 
   # custom chart value overrides
