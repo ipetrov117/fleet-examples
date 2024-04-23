@@ -11,13 +11,13 @@ helm:
     # enable discovery handlers
     onvif:
       discovery:
-        enabled: true
+        enabled: false
     udev:
       discovery:
-        enabled: true
+        enabled: false
     opcua:
       discovery:
-        enabled: true
+        enabled: false
     debugEcho:
       discovery:
-        enabled: true
+        enabled: false
