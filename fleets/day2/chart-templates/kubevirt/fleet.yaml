@@ -6,9 +6,9 @@ helm:
   version: "0.2.4"
   # kubevirt namespace is created by kubevirt as well, we need to take ownership of it, otherwise it fails
   takeOwnership: true
-
   # custom chart value overrides
-  # values:
+  values: {}
+
 
 # https://fleet.rancher.io/bundle-diffs
 diff:

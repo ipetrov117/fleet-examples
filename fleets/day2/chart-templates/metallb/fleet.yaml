@@ -4,9 +4,8 @@ helm:
   releaseName: metallb
   chart: "oci://registry.suse.com/edge/metallb-chart"
   version: "0.14.3"
-
   # custom chart value overrides
-  # values:
+  values: {}
 
 # https://fleet.rancher.io/bundle-diffs
 diff:

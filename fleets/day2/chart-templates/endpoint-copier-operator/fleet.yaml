@@ -4,6 +4,5 @@ helm:
   releaseName: endpoint-copier-operator
   chart: "oci://registry.suse.com/edge/endpoint-copier-operator-chart"
   version: "0.2.0"
-
   # custom chart value overrides
-  # values:
+  values: {}
