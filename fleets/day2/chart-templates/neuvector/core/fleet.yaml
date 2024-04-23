@@ -5,4 +5,6 @@ helm:
   repo: "https://neuvector.github.io/neuvector-helm"
   version: "2.7.5"
   # custom chart value overrides
-  values: {}
+  values: 
+    crdwebhook:
+      enabled: false
