@@ -6,24 +6,6 @@ helm:
   version: "0.6.5"
 
   # custom chart value overrides
-  values:
-    global:
-      enable_tls: true
-      enable_vmedia_tls: true
-      enable_basicAuth: true
-      ironicIP: 192.168.122.172
-      provisioningInterface: eth0
-    
-    metal3-ironic:
-      service:
-        type: NodePort
-      persistence:
-        ironic:
-          # storageClass for the ironic shared volume
-          storageClass: "local-path"
-    metal3-mariadb:
-      # storageClass for the mysql datastore
-      persistence:
-        storageClass: "local-path"
+  # values:
 
     
