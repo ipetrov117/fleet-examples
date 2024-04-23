@@ -5,9 +5,7 @@ helm:
   repo: "https://charts.longhorn.io"
   version: "1.6.0"
   # custom chart value overrides
-  values: 
-    defaultSettings:
-      deletingConfirmationFlag: true
+  values: {}
 
 # https://fleet.rancher.io/bundle-diffs
 diff:
