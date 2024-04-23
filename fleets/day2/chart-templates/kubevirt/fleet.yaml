@@ -8,4 +8,8 @@ helm:
   takeOwnership: true
 
   # custom chart value overrides
-  # values:
+  values:
+    operator:
+      image: registry.suse.com/suse/sles/15.5/virt-operator
+      version: 1.1.1
+      pullPolicy: Always
