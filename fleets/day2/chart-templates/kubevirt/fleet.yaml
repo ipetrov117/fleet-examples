@@ -1,14 +1,9 @@
-defaultNamespace: kubevirt-system
+defaultNamespace: kubevirt
 
 helm:
-  # releaseName: kubevirt
-  # chart: "oci://registry.suse.com/edge/kubevirt-chart"
-  # version: "0.2.4"
-  # # kubevirt namespace is created by kubevirt as well, we need to take ownership of it, otherwise it fails
-  # takeOwnership: true
-  chart: "kubevirt"
-  repo: "https://suse-edge.github.io/charts"
-  version: "0.1.0"
+  releaseName: kubevirt
+  chart: "oci://registry.suse.com/edge/kubevirt-chart"
+  version: "0.2.4"
   # kubevirt namespace is created by kubevirt as well, we need to take ownership of it, otherwise it fails
   takeOwnership: true
 
