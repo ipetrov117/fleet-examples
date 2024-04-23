@@ -16,4 +16,4 @@ diff:
     name: cdi-operator
     namespace: kubevirt
     operations:
-    - {"op":"remove", "path":"/metadata/labels/app.kubernetes.io/managed-by"}
+    - {"op":"remove", "path":"/metadata/labels"}
