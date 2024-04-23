@@ -1,0 +1,6 @@
+helm:
+  chart: "monitor"
+  repo: "https://neuvector.github.io/neuvector-helm"
+  version: "2.7.6"
+  # custom chart value overrides
+  values: {}
