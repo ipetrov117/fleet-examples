@@ -1,3 +1,5 @@
+defaultNamespace: neuvector-system
+
 helm:
   chart: "monitor"
   repo: "https://neuvector.github.io/neuvector-helm"
