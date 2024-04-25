@@ -7,7 +7,7 @@ spec:
   # branch: main
   branch: day-2-examples
   paths:
-  - fleets/day2/k3s-upgrade
+  - fleets/day2/system-upgrade-controller-plans/k3s-upgrade
   # repo: https://github.com/suse-edge/fleet-examples.git
   repo: https://github.com/ipetrov117/fleet-examples.git
   targets:
