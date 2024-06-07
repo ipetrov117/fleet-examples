@@ -3,7 +3,7 @@ kind: Plan
 metadata:
   name: eib-chart-upgrade
 spec:
-  concurrency: 1
+  concurrency: 3
   nodeSelector:
     matchExpressions:
       # Run on all control-plane nodes
