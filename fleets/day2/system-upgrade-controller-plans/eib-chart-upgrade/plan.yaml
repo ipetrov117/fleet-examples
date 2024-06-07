@@ -6,12 +6,8 @@ spec:
   concurrency: 1
   nodeSelector:
     matchExpressions:
-      # Plan should always run on a control-plane node
+      # Run on all control-plane nodes
       - {key: node-role.kubernetes.io/control-plane, operator: In, values: ["true"]}
-      # Change this to the hostname of your 'initializer' node. 
-      # For single node cluster, provide the hostname of the only node.
-      # - {key: kubernetes.io/hostname, operator: In, values: ["CHANGE_ME"]}
-      - {key: kubernetes.io/hostname, operator: In, values: ["localhost.localdomain"]}
   tolerations:
   - key: "CriticalAddonsOnly"
     operator: "Equal"
