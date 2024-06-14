@@ -1,0 +1,8 @@
+defaultNamespace: kube-system
+
+helm:
+  releaseName: sriov-network-operator
+  chart: "oci://registry.suse.com/edge/charts/sriov-network-operator-chart"
+  version: "1.2.2"
+  # custom chart value overrides
+  values: {}
