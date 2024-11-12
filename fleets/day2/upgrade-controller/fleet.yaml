@@ -1,0 +1,6 @@
+defaultNamespace: upgrade-controller-system
+helm:
+  releaseName: upgrade-controller
+  chart: "upgrade-controller"
+  version: "0.1.0"
+  repo: "https://suse-edge.github.io/charts"
