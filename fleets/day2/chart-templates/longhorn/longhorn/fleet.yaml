@@ -1,10 +1,11 @@
 defaultNamespace: longhorn-system
 
 helm:
+  timeoutSeconds: 10
   releaseName: "longhorn"
   chart: "longhorn"
   repo: "https://charts.rancher.io/"
-  version: "104.2.1+up1.7.2"
+  version: "104.2.0+up1.7.1"
   takeOwnership: true
   # custom chart value overrides
   values: {}
