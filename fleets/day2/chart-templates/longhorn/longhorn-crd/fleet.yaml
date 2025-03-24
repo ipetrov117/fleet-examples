@@ -1,6 +1,7 @@
 defaultNamespace: longhorn-system
 
 helm:
+  timeoutSeconds: 10
   releaseName: "longhorn-crd"
   chart: "longhorn-crd"
   repo: "https://charts.rancher.io/"

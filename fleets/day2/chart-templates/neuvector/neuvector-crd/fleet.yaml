@@ -1,6 +1,7 @@
 defaultNamespace: neuvector-system
 
 helm:
+  timeoutSeconds: 10
   releaseName: "neuvector-crd"
   chart: "neuvector-crd"
   repo: "https://charts.rancher.io"
