@@ -6,7 +6,6 @@ helm:
   chart: "neuvector"
   repo: "https://charts.rancher.io"
   version: "105.0.1+up2.8.4"
-  takeOwnership: true
   # custom chart value overrides
   values: {}
 
