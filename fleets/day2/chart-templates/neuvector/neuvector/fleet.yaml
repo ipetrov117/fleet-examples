@@ -6,7 +6,6 @@ helm:
   chart: "neuvector"
   repo: "https://charts.rancher.io"
   version: "105.0.1+up2.8.4"
-  takeOwnership: false
   # custom chart value overrides
   values: {}
 
@@ -31,3 +30,10 @@ diff:
     namespace: neuvector-system
     operations:
     - {"op":"remove", "path":"/spec/leaseTransitions"}
+  - apiVersion: v1
+    kind: Secret
+    name: neuvector-internal-certs
+    namespace: neuvector-system
+    operations:
+    - {"op":"remove", "path":"/metadata/annotations/*"}
+    - {"op":"remove", "path":"/metadata/labels/*"}
