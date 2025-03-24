@@ -1,6 +1,7 @@
 defaultNamespace: neuvector-system
 
 helm:
+  timeoutSeconds: 100
   releaseName: "neuvector"
   chart: "neuvector"
   repo: "https://charts.rancher.io"

@@ -1,7 +1,7 @@
 defaultNamespace: longhorn-system
 
 helm:
-  timeoutSeconds: 10
+  timeoutSeconds: 100
   releaseName: "longhorn"
   chart: "longhorn"
   repo: "https://charts.rancher.io/"
