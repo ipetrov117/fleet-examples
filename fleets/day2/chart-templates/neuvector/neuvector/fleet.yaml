@@ -35,5 +35,8 @@ diff:
     name: neuvector-internal-certs
     namespace: neuvector-system
     operations:
-    - {"op":"remove", "path":"/metadata/annotations/*"}
-    - {"op":"remove", "path":"/metadata/labels/*"}
+    - {"op":"remove", "path":"/metadata/labels/name"}
+    - {"op":"remove", "path":"/metadata/labels/owner"}
+    - {"op":"remove", "path":"/metadata/labels/status"}
+    - {"op":"remove", "path":"/metadata/labels/modifiedAt"}
+    - {"op":"remove", "path":"/metadata/labels/version"}
