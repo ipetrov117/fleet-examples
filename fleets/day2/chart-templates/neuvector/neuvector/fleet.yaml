@@ -12,22 +12,6 @@ helm:
 # https://fleet.rancher.io/bundle-diffs
 diff:
   comparePatches:
-  - apiVersion: apiextensions.k8s.io/v1
-    kind: CustomResourceDefinition
-    name: addresspools.metallb.io
-    operations:
-    - {"op":"remove", "path":"/spec/conversion/webhook/clientConfig/caBundle"}
-    - {"op":"remove", "path":"/status/conditions"}
-    - {"op":"remove", "path":"/status/storedVersions"}
-    - {"op":"remove", "path":"/status/acceptedNames"}
-  - apiVersion: apiextensions.k8s.io/v1
-    kind: CustomResourceDefinition
-    name: bgppeers.metallb.io
-    operations:
-    - {"op":"remove", "path":"/spec/conversion/webhook/clientConfig/caBundle"}
-    - {"op":"remove", "path":"/status/conditions"}
-    - {"op":"remove", "path":"/status/storedVersions"}
-    - {"op":"remove", "path":"/status/acceptedNames"}
   - apiVersion: batch/v1
     kind: CronJob
     name: neuvector-cert-upgrader-pod
@@ -43,3 +27,6 @@ diff:
     name: neuvector-controller
     operations:
     - {"op":"remove", "path":"/spec/leaseTransitions"}
+  - apiVersion: v1
+    kind: Secret
+    name: neuvector-internal-certs
